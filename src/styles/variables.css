@@ -1,0 +1,59 @@
+/*
+	Variables
+ */
+html {
+	/* Font */
+	--font-sans-serif: 'Asap', -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+	helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+	--font-serif: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman,
+	Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji,
+	Segoe UI Emoji, Segoe UI Symbol;
+	--font-monospace: 'Source Code Pro', Consolas, monaco, monospace;
+
+	--font-thin: 300;
+	--font-normal: 500;
+	--font-medium: 600;
+	--font-bold: 800;
+
+	/* Dimensions */
+	--corner-radius: 16px;
+	--spacing: 16px;
+}
+
+/*
+		Tablet and up Styles
+ */
+@media (min-width: calc(550rem / 16)) {
+	html {
+		--corner-radius: 24px;
+		--spacing: 24px;
+	}
+}
+
+/*
+		Laptop and up Styles
+ */
+@media (min-width: calc(1100rem / 16)) {
+	html {
+
+	}
+}
+
+/*
+		Desktop and up Styles
+ */
+@media (min-width: calc(1500rem / 16)) {
+	html {
+		--corner-radius: 32px;
+		--spacing: 32px;
+	}
+}
+
+/*
+		Large Desktop and up Styles
+ */
+@media (min-width: calc(2500rem / 16)) {
+	html {
+
+	}
+}

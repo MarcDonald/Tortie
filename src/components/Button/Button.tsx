@@ -1,7 +1,31 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { ButtonProps } from './Button.types';
+
+import '../../styles/global.css';
+
+function Button({
+  size,
+  primary,
+  disabled,
+  text,
+  onClick,
+  ...props
+}: ButtonProps) {
+  return (
+    <StyledButton
+      type="button"
+      onClick={onClick}
+      primary={primary}
+      disabled={disabled}
+      size={size}
+      {...props}
+    >
+      {text}
+    </StyledButton>
+  );
+}
 
 const StyledButton = styled.button<ButtonProps>`
   border: 0;
@@ -21,9 +45,11 @@ const StyledButton = styled.button<ButtonProps>`
   color: ${(props) => (props.primary ? '#1b116e' : '#ffffff')};
   background-color: ${(props) => (props.primary ? '#6bedb5' : '#1b116e')};
   opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+
   &:hover {
     background-color: ${(props) => (props.primary ? '#55bd90' : '#6bedb5')};
   }
+
   &:active {
     border: solid 2px #1b116e;
     padding: ${(props) =>
@@ -34,27 +60,5 @@ const StyledButton = styled.button<ButtonProps>`
         : '12px 28px 14px'};
   }
 `;
-
-const Button: FC<ButtonProps> = ({
-  size,
-  primary,
-  disabled,
-  text,
-  onClick,
-  ...props
-}) => {
-  return (
-    <StyledButton
-      type="button"
-      onClick={onClick}
-      primary={primary}
-      disabled={disabled}
-      size={size}
-      {...props}
-    >
-      {text}
-    </StyledButton>
-  );
-};
 
 export default Button;
