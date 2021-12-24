@@ -1,6 +1,6 @@
-@import 'reset.scss';
-@import 'fonts.scss';
-@import 'variables.scss';
+@import 'scss/reset';
+@import 'scss/fonts';
+@import 'scss/variables';
 
 html {
 	font-family: var(--font-sans-serif);
