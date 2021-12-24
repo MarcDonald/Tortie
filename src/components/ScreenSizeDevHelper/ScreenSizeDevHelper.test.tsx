@@ -5,8 +5,10 @@
 // import ScreenSizeDevHelper from './ScreenSizeDevHelper';
 
 describe('Running Test for ScreenSizeDevHelper', () => {
-  // test('Check Button Disabled', () => {
-  // render(<ScreenSizeDevHelper backgroundColor={'blue'} />);
-  // expect(screen.getByRole('span'));
-  // });
+  // TODO
+  test('Test', () => {
+    expect(true).toBe(true);
+    // render(<ScreenSizeDevHelper backgroundColor={'blue'} />);
+    // expect(screen.getByRole('span'));
+  });
 });
