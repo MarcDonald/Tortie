@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { ButtonProps } from './Button.types';
 
-import '../../styles/global.css';
+import '../../styles/global.scss';
 
 function Button({
   size,
@@ -32,8 +32,7 @@ const StyledButton = styled.button<ButtonProps>`
   line-height: 1;
   font-size: 15px;
   cursor: pointer;
-  font-weight: 700;
-  font-weight: bold;
+  font-weight: var(--font-bold);
   border-radius: 3px;
   display: inline-block;
   padding: ${(props) =>

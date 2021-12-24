@@ -7,10 +7,10 @@
     "module": "ESNext",
     "declaration": true,
     "declarationDir": "types",
+    "emitDeclarationOnly": true,
     "sourceMap": true,
     "outDir": "dist",
     "moduleResolution": "node",
-    "emitDeclarationOnly": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
   },
