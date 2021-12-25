@@ -11,12 +11,17 @@ import ScreenSizeDevHelperTypes from './ScreenSizeDevHelper.types';
 export default function ScreenSizeDevHelper(
   props: ScreenSizeDevHelperTypes & PassthroughProps
 ) {
+  const getDisplay = (): string => {
+    if (props.forceShow) return 'visible';
+
+    return process.env.NODE_ENV === 'production' ? 'none' : 'visible';
+  };
+
   return (
     <Span
       style={
         {
-          '--display':
-            process.env.NODE_ENV === 'production' ? 'none' : 'visible',
+          '--display': getDisplay(),
         } as CSSProperties
       }
       {...props}

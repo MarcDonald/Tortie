@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/react';
-import React from 'react';
 
 import ScreenSizeDevHelper from './ScreenSizeDevHelper';
 import ScreenSizeDevHelperTypes from './ScreenSizeDevHelper.types';
@@ -15,9 +14,14 @@ const Template: Story<ScreenSizeDevHelperTypes> = (args) => (
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  // Have to add this since it would be hidden in storybook production
+  forceShow: true,
+};
 
 export const Customised = Template.bind({});
 Customised.args = {
+  forceShow: true,
   backgroundColor: 'blue',
   textColor: 'white',
   opacity: '100%',
