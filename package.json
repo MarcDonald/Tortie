@@ -15,7 +15,8 @@
     "format:fix": "prettier -c .prettierrc.js --write .",
     "lint:staged": "lint-staged --allow-empty",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "sh scripts/build-storybook.sh",
+    "deploy-storybook": "sh scripts/deploy-storybook.sh",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -39,6 +40,7 @@
     "@storybook/addon-links": "6.4.9",
     "@storybook/preset-scss": "1.0.3",
     "@storybook/react": "6.4.9",
+    "@storybook/storybook-deployer": "^2.8.10",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
