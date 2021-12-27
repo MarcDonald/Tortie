@@ -1,5 +1,7 @@
 import { createGlobalStyle, css } from 'styled-components';
 
+import { DefaultPixelBreakpoints } from './Breakpoints';
+
 export const TortieVariables = css`
   html {
     /* Dimensions */
@@ -7,38 +9,26 @@ export const TortieVariables = css`
     --tortie-spacing: 16px;
   }
 
-  /*
-		Tablet and up Styles
- */
-  @media (min-width: calc(550rem / 16)) {
+  @media (min-width: calc(${DefaultPixelBreakpoints.tabletMin}rem / 16)) {
     html {
       --tortie-corner-radius: 24px;
       --tortie-spacing: 24px;
     }
   }
 
-  /*
-		Laptop and up Styles
- */
-  @media (min-width: calc(1100rem / 16)) {
+  @media (min-width: calc(${DefaultPixelBreakpoints.laptopMin}rem / 16)) {
     html {
     }
   }
 
-  /*
-		Desktop and up Styles
- */
-  @media (min-width: calc(1500rem / 16)) {
+  @media (min-width: calc(${DefaultPixelBreakpoints.desktopMin}rem / 16)) {
     html {
       --tortie-corner-radius: 32px;
       --tortie-spacing: 32px;
     }
   }
 
-  /*
-		Large Desktop and up Styles
- */
-  @media (min-width: calc(2500rem / 16)) {
+  @media (min-width: calc(${DefaultPixelBreakpoints.largeDesktopMin}rem / 16)) {
     html {
     }
   }
