@@ -1,8 +1,6 @@
 import { CSSProperties } from 'react';
 import styled from 'styled-components';
 
-import '../../styles/global.scss';
-
 import { DefaultBreakpoints } from '../../styles';
 import { PassthroughProps } from '../../types';
 

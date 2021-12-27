@@ -4,9 +4,8 @@ import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 import external from 'rollup-plugin-peer-deps-external';
 import dts from 'rollup-plugin-dts';
-import sass from 'rollup-plugin-sass';
-
 const packageJson = require('./package.json');
+const url = require('rollup-plugin-url');
 
 export default [
   {
@@ -28,15 +27,18 @@ export default [
       external(),
       resolve(),
       commonjs(),
+      url({
+        include: ['**/*.woff2'],
+        limit: Infinity,
+      }),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
-      sass(),
     ],
   },
   {
     input: 'dist/esm/types/index.d.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    external: [/\.scss$/, 'react', 'react-dom'],
+    external: ['react', 'react-dom'],
     plugins: [dts()],
   },
 ];

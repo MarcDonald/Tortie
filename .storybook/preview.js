@@ -1,3 +1,14 @@
+import { TortieStylesGlobal } from '../src';
+
+export const decorators = [
+  (Story) => (
+    <>
+      <TortieStylesGlobal />
+      <Story />
+    </>
+  ),
+];
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
