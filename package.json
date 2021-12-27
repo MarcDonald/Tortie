@@ -16,7 +16,8 @@
     "lint:staged": "lint-staged --allow-empty",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "sh scripts/build-storybook.sh",
-    "deploy-storybook": "sh scripts/deploy-storybook.sh",
+    "deploy-storybook": "storybook-to-ghpages --existing-output-dir=.storybook-public --branch=storybook-deploy",
+    "deploy-storybook:CI": "storybook-to-ghpages --existing-output-dir=.storybook-public --branch=storybook-deploy -- --ci --host-token-env-variable=GH_TOKEN",
     "test": "jest",
     "test:watch": "jest --watch"
   },

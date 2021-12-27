@@ -1,4 +1,4 @@
-name: Lint-Test-Build
+name: 'Build'
 
 on:
   push:
@@ -7,20 +7,36 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  test-build-deploy_storybook:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+
       - name: Lint
-        run: yarn run lint && yarn run format
+        run: yarn run lint
+
+      - name: Format
+        run: yarn run format
+
       - name: Test
         run: yarn test
+
       - name: Build
         run: yarn build
+
+      - name: Build Storybook
+        run: yarn run build-storybook
+
+      - name: Deploy Storybook
+        run: yarn run deploy-storybook:CI
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
