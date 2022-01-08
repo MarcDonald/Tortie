@@ -18,16 +18,27 @@
 ## To use
 
 - Install using `npm` or `yarn`
-- In your app's root add `<TortieGlobalStyles />` e.g.
+- Wrap your app in the TortieThemeProvider
 
 ```jsx
-import { TortieStylesGlobal } from 'tortie';
+import { TortieThemeProvider } from 'tortie';
 
 return (
-  <>
-    <TortieStylesGlobal />
+  <TortieThemeProvider>
     <App />
-  </>
+  </TortieThemeProvider>
+);
+```
+
+You can also optionally pass in your own theme
+
+```jsx
+import { TortieThemeProvider } from 'tortie';
+
+return (
+  <TortieThemeProvider theme={customTheme}>
+    <App />
+  </TortieThemeProvider>
 );
 ```
 

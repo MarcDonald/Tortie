@@ -1,10 +1,11 @@
-import { TortieStylesGlobal } from '../src';
+import TortieThemeProvider from '../src/components/TortieThemeProvider';
 
 export const decorators = [
   (Story) => (
     <>
-      <TortieStylesGlobal />
-      <Story />
+      <TortieThemeProvider>
+        <Story />
+      </TortieThemeProvider>
     </>
   ),
 ];

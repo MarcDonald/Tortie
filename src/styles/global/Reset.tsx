@@ -1,6 +1,6 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { css } from 'styled-components';
 
-export const TortieReset = css`
+export const Reset = css`
   /*
     RESET
     From Josh Comeau's Reset
@@ -75,6 +75,4 @@ export const TortieReset = css`
   }
 `;
 
-export const TortieResetGlobal = createGlobalStyle`
-  ${TortieReset}
-`;
+export default Reset;
