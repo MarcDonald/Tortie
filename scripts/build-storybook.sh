@@ -1,4 +1,4 @@
 #!/usr/bin/sh
 
 build-storybook -o .storybook-public
-echo 'TORTIE.MARCDONALD.COM' > '.storybook-public/CNAME'
+echo 'STORYBOOK.TORTIE.DEV' > '.storybook-public/CNAME'
