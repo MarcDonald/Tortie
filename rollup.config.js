@@ -31,7 +31,10 @@ export default [
         include: ['**/*.woff2'],
         limit: Infinity,
       }),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript({
+        exclude: ['src/showcase-components/**'],
+        tsconfig: './tsconfig.json',
+      }),
       terser(),
     ],
   },

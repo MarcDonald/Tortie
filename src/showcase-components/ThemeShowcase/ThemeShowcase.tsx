@@ -2,7 +2,7 @@ import styled, { useTheme } from 'styled-components';
 
 import { Theme } from '../../types';
 import { Colors } from '../../types/Theme';
-import cssVar from '../../utils/cssVar';
+import { cssVar } from '../../utils';
 
 export default function ThemeShowcase() {
   const theme: Theme = useTheme() as unknown as Theme;

@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 import { createGlobalStyle } from 'styled-components';
 
-import cssVar from '../../utils/cssVar';
+import { cssVar } from '../../utils';
 
 import MaxWidthPageContainer from './MaxWidthPageContainer';
 import MaxWidthPageContainerTypes from './MaxWidthPageContainer.types';
