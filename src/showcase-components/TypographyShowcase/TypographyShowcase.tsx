@@ -16,6 +16,7 @@ export default function TypographyShowcase(props: TypographyShowcaseTypes) {
           <h5>h5 - {exampleSentence}</h5>
           <h6>h6 - {exampleSentence}</h6>
           <p>p - {exampleSentence}</p>
+          <a href={'#'}>a - {exampleSentence}</a>
           <em style={{ display: 'block' }}>em - {exampleSentence}</em>
           <strong>strong - {exampleSentence}</strong>
           <span style={{ display: 'block' }}>span - {exampleSentence}</span>

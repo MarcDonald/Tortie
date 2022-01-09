@@ -58,7 +58,7 @@ export const DefaultThemeLight: Theme = {
   },
   palette: {
     background: '#FFEEE4',
-    surface: '#FFE5D6',
+    surface: '#FFFFFF',
     primary: '#A1961B',
     secondary: cssVar('color-blue-50'),
     tertiary: '#403F39',

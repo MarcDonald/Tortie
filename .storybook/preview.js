@@ -1,14 +1,31 @@
 import TortieThemeProvider from '../src/components/TortieThemeProvider';
+import { createGlobalStyle } from 'styled-components';
 
 export const decorators = [
   (Story) => (
-    <>
-      <TortieThemeProvider>
-        <Story />
-      </TortieThemeProvider>
-    </>
+    <TortieThemeProvider>
+      <StoryStyles />
+      <Story />
+    </TortieThemeProvider>
   ),
 ];
+
+const StoryStyles = createGlobalStyle`
+  html, body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-background);
+  }
+
+  #root {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+`;
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },

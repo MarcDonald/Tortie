@@ -57,6 +57,7 @@ export const Styles = css`
   span,
   code,
   em,
+  a,
   strong {
     font-size: var(--font-size-3);
   }
@@ -64,6 +65,21 @@ export const Styles = css`
   figcaption {
     font-size: var(--font-size-2);
     font-style: italic;
+  }
+
+  a {
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
+
+    text-underline-offset: 0.2em;
+    text-decoration: 0.1em underline transparent;
+    transition: text-decoration 400ms;
+
+    &:hover,
+    &:focus {
+      transition: text-decoration 150ms;
+      text-decoration-color: var(--color-primary);
+    }
   }
 
   @media (min-width: calc(${DefaultPixelBreakpoints.tabletMin}rem / 16)) {

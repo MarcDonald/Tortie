@@ -147,6 +147,7 @@ const ColorDisplay = styled.div<{ displayColor: string }>`
   height: var(--size);
   width: var(--size);
   background-color: ${(props) => props.displayColor};
+  border-radius: var(--corner-radius-medium);
 
   will-change: transform;
   transition: ease-in-out 200ms;
