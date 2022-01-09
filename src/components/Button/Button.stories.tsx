@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 
 import Button from './Button';
+import ButtonTypes from './Button.types';
 
 export default {
   title: 'Button',
@@ -8,19 +9,27 @@ export default {
   argTypes: {},
 } as Meta<typeof Button>;
 
-const Template: Story<typeof Button> = (args) => (
-  <Button text={'Click me!'} onClick={() => {}} {...args} />
-);
+const Template: Story<ButtonTypes> = (args) => <Button {...args} />;
+
+const defaultArgs = {
+  text: 'Click me!',
+  onClick: () => {
+    console.log('Click');
+  },
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
+  ...defaultArgs,
   variant: 'primary',
 };
 export const Secondary = Template.bind({});
 Secondary.args = {
+  ...defaultArgs,
   variant: 'secondary',
 };
-export const Outline = Template.bind({});
-Outline.args = {
-  variant: 'outline',
+export const Ghost = Template.bind({});
+Ghost.args = {
+  ...defaultArgs,
+  variant: 'ghost',
 };

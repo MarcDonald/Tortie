@@ -4,30 +4,70 @@ import { Theme } from '../../types';
 import { ColorRange } from '../../types/Theme';
 import TypedPropsWithTheme from '../../types/TypedPropsWithTheme';
 
-import { DefaultPixelBreakpoints } from './Breakpoints';
+import { DefaultPixelBreakpoints, Device } from './Breakpoints';
 
 const Variables = css`
   html {
     /* Palette */
+    ${({ theme }: TypedPropsWithTheme) => ColorVariables(theme)};
+    ${({ theme }: TypedPropsWithTheme) => TypefaceColors(theme)}
+
     --color-primary: ${({ theme }: TypedPropsWithTheme) =>
       theme.palette.primary};
     --color-secondary: ${({ theme }: TypedPropsWithTheme) =>
       theme.palette.secondary};
+    --color-tertiary: ${({ theme }: TypedPropsWithTheme) =>
+      theme.palette.tertiary};
     --color-background: ${({ theme }: TypedPropsWithTheme) =>
       theme.palette.background};
     --color-surface: ${({ theme }: TypedPropsWithTheme) =>
       theme.palette.surface};
+    --color-success: ${({ theme }: TypedPropsWithTheme) =>
+      theme.palette.success};
+    --color-error: ${({ theme }: TypedPropsWithTheme) => theme.palette.error};
+    --color-white: ${({ theme }: TypedPropsWithTheme) => theme.palette.white};
+    --color-black: ${({ theme }: TypedPropsWithTheme) => theme.palette.black};
 
-    --color-font-primary: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.typeface.primary};
-    --color-font-primary-inverse: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.typeface.primaryInverse};
-    --color-font-secondary: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.typeface.secondary};
-    --color-font-tertiary: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.typeface.tertiary};
+    /* Shadows */
+    --shadow-on-background-color: 23deg 32% 59%;
+    --shadow-on-background-elevation-low: 0.3px 0.5px 0.7px
+        hsl(var(--shadow-on-background-color) / 0.34),
+      0.4px 0.8px 1px -1.2px hsl(var(--shadow-on-background-color) / 0.34),
+      1px 2px 2.5px -2.5px hsl(var(--shadow-on-background-color) / 0.34);
+    --shadow-on-background-elevation-medium: 0.3px 0.5px 0.7px
+        hsl(var(--shadow-on-background-color) / 0.36),
+      0.8px 1.6px 2px -0.8px hsl(var(--shadow-on-background-color) / 0.36),
+      2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-on-background-color) / 0.36),
+      5px 10px 12.6px -2.5px hsl(var(--shadow-on-background-color) / 0.36);
+    --shadow-on-background-elevation-high: 0.3px 0.5px 0.7px
+        hsl(var(--shadow-on-background-color) / 0.34),
+      1.5px 2.9px 3.7px -0.4px hsl(var(--shadow-on-background-color) / 0.34),
+      2.7px 5.4px 6.8px -0.7px hsl(var(--shadow-on-background-color) / 0.34),
+      4.5px 8.9px 11.2px -1.1px hsl(var(--shadow-on-background-color) / 0.34),
+      7.1px 14.3px 18px -1.4px hsl(var(--shadow-on-background-color) / 0.34),
+      11.2px 22.3px 28.1px -1.8px hsl(var(--shadow-on-background-color) / 0.34),
+      17px 33.9px 42.7px -2.1px hsl(var(--shadow-on-background-color) / 0.34),
+      25px 50px 62.9px -2.5px hsl(var(--shadow-on-background-color) / 0.34);
 
-    ${({ theme }: TypedPropsWithTheme) => ColorVariables(theme)};
+    --shadow-on-surface-color: 22deg 37% 57%;
+    --shadow-on-surface-elevation-low: 0.3px 0.5px 0.7px
+        hsl(var(--shadow-on-surface-color) / 0.34),
+      0.4px 0.8px 1px -1.2px hsl(var(--shadow-on-surface-color) / 0.34),
+      1px 2px 2.5px -2.5px hsl(var(--shadow-on-surface-color) / 0.34);
+    --shadow-on-surface-elevation-medium: 0.3px 0.5px 0.7px
+        hsl(var(--shadow-on-surface-color) / 0.36),
+      0.8px 1.6px 2px -0.8px hsl(var(--shadow-on-surface-color) / 0.36),
+      2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-on-surface-color) / 0.36),
+      5px 10px 12.6px -2.5px hsl(var(--shadow-on-surface-color) / 0.36);
+    --shadow-on-surface-elevation-high: 0.3px 0.5px 0.7px
+        hsl(var(--shadow-on-surface-color) / 0.34),
+      1.5px 2.9px 3.7px -0.4px hsl(var(--shadow-on-surface-color) / 0.34),
+      2.7px 5.4px 6.8px -0.7px hsl(var(--shadow-on-surface-color) / 0.34),
+      4.5px 8.9px 11.2px -1.1px hsl(var(--shadow-on-surface-color) / 0.34),
+      7.1px 14.3px 18px -1.4px hsl(var(--shadow-on-surface-color) / 0.34),
+      11.2px 22.3px 28.1px -1.8px hsl(var(--shadow-on-surface-color) / 0.34),
+      17px 33.9px 42.7px -2.1px hsl(var(--shadow-on-surface-color) / 0.34),
+      25px 50px 62.9px -2.5px hsl(var(--shadow-color) / 0.34);
 
     /* Dimensions */
     ${({ theme }: TypedPropsWithTheme) => CornerRadius('phone', theme)}
@@ -89,7 +129,20 @@ const Variables = css`
   }
 `;
 
-type Device = 'phone' | 'tablet' | 'laptop' | 'desktop' | 'largeDesktop';
+function ColorVariables(theme: Theme): string {
+  let result = '';
+  for (const key in theme.palette.colors) {
+    // Can disable these because we're getting the keys from the colors object
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    result += themeColorToCssVariables(key, theme.palette.colors[key]);
+  }
+  return result;
+}
+
+function TypefaceColors(theme: Theme) {
+  return themeToCssVariables('color-font', theme.palette.typeface);
+}
 
 function CornerRadius(device: Device, theme: Theme) {
   return themeToCssVariables(
@@ -110,10 +163,6 @@ function FontWeights(theme: Theme) {
   return themeToCssVariables('font', theme.typeface.weights);
 }
 
-function ColorVariables(theme: Theme): string {
-  return themeColorToCssVariables('gray', theme.palette.gray);
-}
-
 function themeColorToCssVariables(name: string, range: ColorRange): string {
   return themeToCssVariables(`color-${name}`, range);
 }
@@ -121,7 +170,12 @@ function themeColorToCssVariables(name: string, range: ColorRange): string {
 function themeToCssVariables(prefix: string, obj: any) {
   let result = '';
   for (const key in obj) {
-    result += `--${prefix}-${key}: ${obj[key]};`;
+    // Converts key from camelcase to kebab case
+    // https://gist.github.com/nblackburn/875e6ff75bc8ce171c758bf75f304707
+    const formattedKey = key
+      .replace(/\B(?:([A-Z])(?=[a-z]))|(?:(?<=[a-z0-9])([A-Z]))/g, '-$1$2')
+      .toLowerCase();
+    result += `--${prefix}-${formattedKey}: ${obj[key]};`;
   }
   return result;
 }

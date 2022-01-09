@@ -1,6 +1,10 @@
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+
 export default interface ButtonTypes {
   text: string;
   onClick: () => void;
-  size?: 'small' | 'medium' | 'large';
-  variant?: 'primary' | 'secondary' | 'outline';
+  size?: ButtonSize;
+  variant?: ButtonVariant;
+  disabled?: boolean;
 }

@@ -1,3 +1,5 @@
+export type Device = 'phone' | 'tablet' | 'laptop' | 'desktop' | 'largeDesktop';
+
 export interface BreakpointTypes<T extends number | string> {
   tabletMin: T;
   laptopMin: T;

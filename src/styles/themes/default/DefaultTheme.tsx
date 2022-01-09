@@ -1,116 +1,85 @@
 import { Theme } from '../../../types';
+import { Spacing } from '../../../types/Theme';
+import { cssVar } from '../../../utils';
 import { DefaultBreakpoints } from '../../variables';
 
-const DefaultTheme: Theme = {
+import { Blue, Gray, Green, Red } from './DefaultColors';
+
+const cornerRadius = {
+  small: '4px',
+  medium: '8px',
+  large: '16px',
+  round: '99999px',
+};
+
+const spacing: Spacing = {
+  1: '4px',
+  2: '8px',
+  3: '12px',
+  4: '16px',
+  5: '24px',
+  6: '32px',
+  7: '48px',
+  8: '64px',
+  9: '96px',
+  10: '128px',
+};
+
+const maxPageWidth = '1600px';
+
+export const DefaultThemeLight: Theme = {
   breakpoints: DefaultBreakpoints,
   dimensions: {
     phone: {
-      cornerRadius: {
-        small: '4px',
-        medium: '8px',
-        large: '16px',
-        round: '99999px',
-      },
-      spacing: {
-        1: '4px',
-        2: '8px',
-        3: '12px',
-        4: '16px',
-        5: '24px',
-        6: '32px',
-      },
-      maxPageWidth: '1600px',
+      cornerRadius,
+      spacing,
+      maxPageWidth,
     },
     tablet: {
-      cornerRadius: {
-        small: '4px',
-        medium: '8px',
-        large: '16px',
-        round: '999999px',
-      },
-      spacing: {
-        1: '4px',
-        2: '8px',
-        3: '12px',
-        4: '16px',
-        5: '24px',
-        6: '32px',
-      },
-      maxPageWidth: '1600px',
+      cornerRadius,
+      spacing,
+      maxPageWidth,
     },
     laptop: {
-      cornerRadius: {
-        small: '4px',
-        medium: '8px',
-        large: '16px',
-        round: '999999px',
-      },
-      spacing: {
-        1: '4px',
-        2: '8px',
-        3: '12px',
-        4: '16px',
-        5: '24px',
-        6: '32px',
-      },
-      maxPageWidth: '1600px',
+      cornerRadius,
+      spacing,
+      maxPageWidth,
     },
     desktop: {
-      cornerRadius: {
-        small: '4px',
-        medium: '8px',
-        large: '16px',
-        round: '999999px',
-      },
-      spacing: {
-        1: '4px',
-        2: '8px',
-        3: '12px',
-        4: '16px',
-        5: '24px',
-        6: '32px',
-      },
-      maxPageWidth: '1600px',
+      cornerRadius,
+      spacing,
+      maxPageWidth,
     },
     largeDesktop: {
-      cornerRadius: {
-        small: '4px',
-        medium: '8px',
-        large: '16px',
-        round: '999999px',
-      },
-      spacing: {
-        1: '4px',
-        2: '8px',
-        3: '12px',
-        4: '16px',
-        5: '24px',
-        6: '32px',
-      },
-      maxPageWidth: '1600px',
+      cornerRadius,
+      spacing,
+      maxPageWidth,
     },
   },
   palette: {
-    background: 'hsl(200, 75%, 7%)',
-    surface: 'hsl(0, 100%, 100%)',
-    primary: 'hsl(55, 71%, 37%)',
-    secondary: 'hsl(224, 44%, 61%)',
+    background: '#FFEEE4',
+    surface: '#FFE5D6',
+    primary: '#A1961B',
+    secondary: cssVar('color-blue-50'),
+    tertiary: '#403F39',
+    success: cssVar('color-green-50'),
+    error: cssVar('color-red-50'),
+    white: '#FFEEE4',
+    black: '#010203',
     typeface: {
-      primary: 'hsl(202, 85%, 8%)',
-      primaryInverse: 'hsl(0, 0%, 100%)',
-      secondary: 'hsl(180, 50%, 25%)',
-      tertiary: 'hsl(180, 30%, 45%)',
+      onBackground: cssVar('color-black'),
+      onSurface: cssVar('color-black'),
+      onPrimary: '#FFFFFF',
+      onSecondary: '#FFFFFF',
+      onTertiary: '#FFFFFF',
+      onError: '#FFFFFF',
+      onSuccess: cssVar('color-black'),
     },
-    gray: {
-      10: '#cfd8dc',
-      20: '#b0bec5',
-      30: '#90a4ae',
-      40: '#78909c',
-      50: '#607d8b',
-      60: '#546e7a',
-      70: '#455a64',
-      80: '#37474f',
-      90: '#263238',
+    colors: {
+      gray: Gray,
+      red: Red,
+      green: Green,
+      blue: Blue,
     },
   },
   typeface: {
@@ -135,5 +104,3 @@ const DefaultTheme: Theme = {
     },
   },
 };
-
-export default DefaultTheme;

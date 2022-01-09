@@ -17,5 +17,4 @@ const Container = styled.div<MaxWidthPageContainerTypes & PassthroughProps>`
   margin: 0 auto;
   padding-left: var(--spacing-4);
   padding-right: var(--spacing-4);
-  background-color: var(--color-background);
 `;

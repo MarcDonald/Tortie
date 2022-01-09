@@ -1,6 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 import { createGlobalStyle } from 'styled-components';
 
+import cssVar from '../../utils/cssVar';
+
 import MaxWidthPageContainer from './MaxWidthPageContainer';
 import MaxWidthPageContainerTypes from './MaxWidthPageContainer.types';
 
@@ -20,11 +22,12 @@ const Template: Story<MaxWidthPageContainerTypes> = (args) => (
           height: '100%',
           display: 'grid',
           placeItems: 'center',
+          backgroundColor: cssVar('color-surface'),
         }}
       >
         <h1
           style={{
-            color: 'var(--color-font-primary-inverse)',
+            color: cssVar('color-font-on-surface'),
           }}
         >
           Contained Content
@@ -43,7 +46,7 @@ const WrapperStyles = createGlobalStyle`
   }
 
   #root {
-    background-color: var(--color-gray-40);
+    background-color: cssVar('color-background')
     padding: 0;
     margin: 0;
   }

@@ -1,6 +1,6 @@
 {
   "name": "tortie",
-  "version": "1.0.0-alpha05",
+  "version": "1.0.0-alpha06",
   "description": "Components and Convenience for React",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -19,7 +19,8 @@
     "deploy-storybook": "storybook-to-ghpages --existing-output-dir=.storybook-public --branch=storybook-deploy",
     "deploy-storybook:CI": "storybook-to-ghpages --existing-output-dir=.storybook-public --branch=storybook-deploy -- --ci --host-token-env-variable=GH_TOKEN",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "husky:prepare": "husky install"
   },
   "repository": {
     "type": "git",
