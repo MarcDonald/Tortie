@@ -60,7 +60,7 @@ const GhostButton = styled(StyledButton)`
     transform: none;
     transition: ease-in-out 150ms;
     border: var(--color-primary) 1px dashed;
-    color: var(--color-font-on-background);
+    color: var(--color-on-background);
   }
 
   &:disabled {
@@ -90,11 +90,11 @@ function getBackgroundColor(variant: ButtonVariant): string {
 function getTextColor(variant: ButtonVariant): string {
   switch (variant) {
     case 'primary':
-      return cssVar('color-font-on-primary');
+      return cssVar('color-on-primary');
     case 'secondary':
-      return cssVar('color-font-on-secondary');
+      return cssVar('color-on-secondary');
     case 'ghost':
-      return cssVar('color-font-on-background');
+      return cssVar('color-on-background');
   }
 }
 

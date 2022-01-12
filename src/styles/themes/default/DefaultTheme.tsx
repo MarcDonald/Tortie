@@ -1,9 +1,5 @@
-import { Theme } from '../../../types';
-import { Spacing } from '../../../types/Theme';
-import { cssVar } from '../../../utils';
+import { PaletteColor, Spacing, Theme } from '../../../types';
 import { DefaultBreakpoints } from '../../variables';
-
-import { Blue, Gray, Green, Red } from './DefaultColors';
 
 const cornerRadius = {
   small: '4px',
@@ -26,6 +22,9 @@ const spacing: Spacing = {
 };
 
 const maxPageWidth = '1600px';
+
+const black = new PaletteColor('black', 0, 0, 0);
+const white = new PaletteColor('white', 0, 100, 100);
 
 export const DefaultThemeLight: Theme = {
   breakpoints: DefaultBreakpoints,
@@ -57,32 +56,74 @@ export const DefaultThemeLight: Theme = {
     },
   },
   palette: {
-    background: '#FFEEE4',
-    surface: '#FFFFFF',
-    primary: '#A1961B',
-    secondary: cssVar('color-blue-50'),
-    tertiary: '#403F39',
-    success: cssVar('color-green-50'),
-    error: cssVar('color-red-50'),
-    white: '#FFEEE4',
-    black: '#010203',
-    typeface: {
-      onBackground: cssVar('color-black'),
-      onSurface: cssVar('color-black'),
-      onPrimary: '#FFFFFF',
-      onSecondary: '#FFFFFF',
-      onTertiary: '#FFFFFF',
-      onError: '#FFFFFF',
-      onSuccess: cssVar('color-black'),
+    core: {
+      background: new PaletteColor('background', 15, 50, 97),
+      surface: new PaletteColor(
+        'surface',
+        white.hue,
+        white.saturation,
+        white.lightness
+      ),
+      primary: new PaletteColor('primary', 33, 84, 48),
+      secondary: new PaletteColor('secondary', 240, 100, 7),
+      tertiary: new PaletteColor('tertiary', 341, 57, 28),
+      success: new PaletteColor('success', 91, 46, 47),
+      error: new PaletteColor('error', 354, 71, 55),
     },
-    colors: {
-      gray: Gray,
-      red: Red,
-      green: Green,
-      blue: Blue,
+    typography: {
+      onBackground: new PaletteColor(
+        'onBackground',
+        black.hue,
+        black.saturation,
+        black.lightness
+      ),
+      onSurface: new PaletteColor(
+        'onSurface',
+        black.hue,
+        black.saturation,
+        black.lightness
+      ),
+      onPrimary: new PaletteColor(
+        'onPrimary',
+        white.hue,
+        white.saturation,
+        white.lightness
+      ),
+      onSecondary: new PaletteColor(
+        'onSecondary',
+        white.hue,
+        white.saturation,
+        white.lightness
+      ),
+      onTertiary: new PaletteColor(
+        'onTertiary',
+        white.hue,
+        white.saturation,
+        white.lightness
+      ),
+      onError: new PaletteColor(
+        'onError',
+        white.hue,
+        white.saturation,
+        white.lightness
+      ),
+      onSuccess: new PaletteColor(
+        'onSuccess',
+        black.hue,
+        black.saturation,
+        black.lightness
+      ),
+    },
+    base: {
+      gray: new PaletteColor('gray', 0, 0, 27),
+      red: new PaletteColor('red', 354, 71, 55),
+      green: new PaletteColor('green', 91, 46, 47),
+      blue: new PaletteColor('blue', 235, 31, 48),
+      white: white,
+      black: black,
     },
   },
-  typeface: {
+  typography: {
     weights: {
       thin: 300,
       normal: 400,

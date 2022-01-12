@@ -1,55 +1,56 @@
 import styled, { useTheme } from 'styled-components';
 
-import { Theme } from '../../types';
-import { Colors } from '../../types/Theme';
+import { BaseColor, BaseColors, Theme } from '../../types';
 import { cssVar } from '../../utils';
 
 export default function ThemeShowcase() {
   const theme: Theme = useTheme() as unknown as Theme;
   return (
     <Container>
-      <h4>Core</h4>
+      <h3>Core</h3>
       <Swatch>
         <ColorBox
-          displayColor={theme.palette.primary}
-          textColor={cssVar('color-font-on-primary')}
+          displayColor={theme.palette.core.primary.hsl}
+          textColor={cssVar('color-on-primary')}
           name={'Primary'}
         />
         <ColorBox
-          displayColor={theme.palette.secondary}
-          textColor={cssVar('color-font-on-secondary')}
+          displayColor={theme.palette.core.secondary.hsl}
+          textColor={cssVar('color-on-secondary')}
           name={'Secondary'}
         />
         <ColorBox
-          displayColor={theme.palette.tertiary}
-          textColor={cssVar('color-font-on-tertiary')}
+          displayColor={theme.palette.core.tertiary.hsl}
+          textColor={cssVar('color-on-tertiary')}
           name={'Tertiary'}
         />
         <ColorBox
-          displayColor={theme.palette.error}
-          textColor={cssVar('color-font-on-error')}
+          displayColor={theme.palette.core.error.hsl}
+          textColor={cssVar('color-on-error')}
           name={'Error'}
         />
         <ColorBox
-          displayColor={theme.palette.success}
-          textColor={cssVar('color-font-on-success')}
+          displayColor={theme.palette.core.success.hsl}
+          textColor={cssVar('color-on-success')}
           name={'Success'}
         />
         <ColorBox
-          displayColor={theme.palette.background}
-          textColor={cssVar('color-font-on-background')}
+          displayColor={theme.palette.core.background.hsl}
+          textColor={cssVar('color-on-background')}
           name={'Background'}
+          border
         />
         <ColorBox
-          displayColor={theme.palette.surface}
-          textColor={cssVar('color-font-on-surface')}
+          displayColor={theme.palette.core.surface.hsl}
+          textColor={cssVar('color-on-surface')}
           name={'Surface'}
+          border
         />
       </Swatch>
-      <ColorSwatchRow colorName={'gray'} colors={theme.palette.colors} />
-      <ColorSwatchRow colorName={'blue'} colors={theme.palette.colors} />
-      <ColorSwatchRow colorName={'red'} colors={theme.palette.colors} />
-      <ColorSwatchRow colorName={'green'} colors={theme.palette.colors} />
+      <h3>Base</h3>
+      <ColorSwatchesForPalette colorPalette={theme.palette.base} />
+      <h3>Core Swatch</h3>
+      <ColorSwatchesForPalette colorPalette={theme.palette.core} />
     </Container>
   );
 }
@@ -66,56 +67,50 @@ const Container = styled.main`
 const Swatch = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 4px;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-6);
 `;
 
-function ColorSwatchRow(props: {
-  colorName: 'gray' | 'blue' | 'red' | 'green';
-  colors: Colors;
-}) {
+function ColorSwatchesForPalette({ colorPalette }: { colorPalette: any }) {
+  const swatches = [];
+
+  for (const key in colorPalette) {
+    swatches.push(
+      <ColorSwatchRow
+        colorName={key as unknown as BaseColor}
+        // Can disable linting because we're accessing the object based on the keys we get from looping
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        colors={colorPalette}
+        key={key}
+      />
+    );
+  }
+
+  return <>{swatches.map((swatch) => swatch)}</>;
+}
+
+function ColorSwatchRow(props: { colorName: BaseColor; colors: BaseColors }) {
+  const loopArray: number[] = new Array(10);
+  for (let i = 1; i <= 10; i++) {
+    loopArray[i] = i / 10;
+  }
   return (
     <>
       <Split />
-      <h4>
+      <h5>
         {props.colorName.charAt(0).toUpperCase() + props.colorName.slice(1)}
-      </h4>
+      </h5>
       <Swatch>
-        <ColorBox
-          displayColor={props.colors[props.colorName]['10']}
-          name={'10'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['20']}
-          name={'20'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['30']}
-          name={'30'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['40']}
-          name={'40'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['50']}
-          name={'50'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['60']}
-          name={'60'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['70']}
-          name={'70'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['80']}
-          name={'80'}
-        />
-        <ColorBox
-          displayColor={props.colors[props.colorName]['90']}
-          name={'90'}
-        />
+        {loopArray.map((i) => {
+          return (
+            <ColorBox
+              key={`${props.colorName}-${i}`}
+              displayColor={props.colors[props.colorName].hsla(i)}
+              name={i.toString()}
+            />
+          );
+        })}
       </Swatch>
     </>
   );
@@ -125,9 +120,10 @@ function ColorBox(props: {
   displayColor: string;
   textColor?: string;
   name: string;
+  border?: boolean;
 }) {
   return (
-    <ColorDisplay displayColor={props.displayColor}>
+    <ColorDisplay displayColor={props.displayColor} border={props.border}>
       <span
         style={{
           margin: 4,
@@ -142,12 +138,13 @@ function ColorBox(props: {
   );
 }
 
-const ColorDisplay = styled.div<{ displayColor: string }>`
+const ColorDisplay = styled.div<{ displayColor: string; border?: boolean }>`
   --size: 100px;
   height: var(--size);
   width: var(--size);
   background-color: ${(props) => props.displayColor};
   border-radius: var(--corner-radius-medium);
+  border: ${(props) => `1px solid ${props.border ? 'black' : 'transparent'}`};
 
   will-change: transform;
   transition: ease-in-out 200ms;

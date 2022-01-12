@@ -8,7 +8,7 @@ export default function Card(props: CardTypes & PassthroughProps) {
   const Container = props.hoverable ? HoverableCardContainer : CardContainer;
 
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       <Container>
         {props.title && <CardTitle {...props} />}
         {props.children}

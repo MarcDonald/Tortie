@@ -16,7 +16,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapRegularWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.normal};
+      theme.typography.weights.normal};
     font-style: normal;
   }
 
@@ -24,7 +24,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapItalicWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.normal};
+      theme.typography.weights.normal};
     font-style: italic;
   }
 
@@ -32,7 +32,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapMediumWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.medium};
+      theme.typography.weights.medium};
     font-style: normal;
   }
 
@@ -40,7 +40,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapMediumItalicWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.medium};
+      theme.typography.weights.medium};
     font-style: italic;
   }
 
@@ -48,7 +48,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapSemiBoldWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.semibold};
+      theme.typography.weights.semibold};
     font-style: normal;
   }
 
@@ -56,7 +56,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapSemiBoldItalicWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.semibold};
+      theme.typography.weights.semibold};
     font-style: italic;
   }
 
@@ -64,7 +64,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapBoldWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.bold};
+      theme.typography.weights.bold};
     font-style: normal;
   }
 
@@ -72,7 +72,7 @@ const Asap = css`
     font-family: 'Asap';
     src: local('Asap'), url(${AsapBoldItalicWoff2}) format('woff2');
     font-weight: ${({ theme }: TypedPropsWithTheme) =>
-      theme.typeface.weights.bold};
+      theme.typography.weights.bold};
     font-style: italic;
   }
 `;

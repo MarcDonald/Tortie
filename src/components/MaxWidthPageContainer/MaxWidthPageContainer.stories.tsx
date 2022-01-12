@@ -24,7 +24,7 @@ const Template: Story<MaxWidthPageContainerTypes> = (args) => (
     >
       <h1
         style={{
-          color: cssVar('color-font-on-surface'),
+          color: cssVar('color-on-surface'),
         }}
       >
         Contained Content

@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 import { DefaultThemeLight, GlobalStyle } from '../../styles';
-import Theme from '../../types/Theme';
+import { Theme } from '../../types';
 
 export default function TortieThemeProvider(props: {
   theme?: Theme;

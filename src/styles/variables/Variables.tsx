@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 
-import { Theme } from '../../types';
-import { ColorRange } from '../../types/Theme';
+import { PaletteColor, Theme } from '../../types';
 import TypedPropsWithTheme from '../../types/TypedPropsWithTheme';
 
 import { DefaultPixelBreakpoints, Device } from './Breakpoints';
@@ -10,26 +9,9 @@ const Variables = css`
   html {
     /* Palette */
     ${({ theme }: TypedPropsWithTheme) => ColorVariables(theme)};
-    ${({ theme }: TypedPropsWithTheme) => TypefaceColors(theme)}
-
-    --color-primary: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.primary};
-    --color-secondary: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.secondary};
-    --color-tertiary: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.tertiary};
-    --color-background: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.background};
-    --color-surface: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.surface};
-    --color-success: ${({ theme }: TypedPropsWithTheme) =>
-      theme.palette.success};
-    --color-error: ${({ theme }: TypedPropsWithTheme) => theme.palette.error};
-    --color-white: ${({ theme }: TypedPropsWithTheme) => theme.palette.white};
-    --color-black: ${({ theme }: TypedPropsWithTheme) => theme.palette.black};
 
     /* Shadows */
-    --shadow-on-background-color: 23deg 32% 59%;
+    --shadow-on-background-color: 16deg 15% 60%;
     --shadow-on-background-elevation-low: 0.3px 0.5px 0.7px
         hsl(var(--shadow-on-background-color) / 0.34),
       0.4px 0.8px 1px -1.2px hsl(var(--shadow-on-background-color) / 0.34),
@@ -130,18 +112,27 @@ const Variables = css`
 `;
 
 function ColorVariables(theme: Theme): string {
+  // Can disable eslint and ts warnings because we're getting the keys from the object we're looping through
   let result = '';
-  for (const key in theme.palette.colors) {
-    // Can disable these because we're getting the keys from the colors object
+  for (const key in theme.palette.base) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    result += themeColorToCssVariables(key, theme.palette.colors[key]);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    result += paletteColorToCssVariables(theme.palette.base[key]);
+  }
+  for (const key in theme.palette.typography) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    result += paletteColorToCssVariables(theme.palette.typography[key]);
+  }
+
+  for (const key in theme.palette.core) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    result += paletteColorToCssVariables(theme.palette.core[key]);
   }
   return result;
-}
-
-function TypefaceColors(theme: Theme) {
-  return themeToCssVariables('color-font', theme.palette.typeface);
 }
 
 function CornerRadius(device: Device, theme: Theme) {
@@ -156,15 +147,11 @@ function Spacing(device: Device, theme: Theme) {
 }
 
 function FontSizes(theme: Theme) {
-  return themeToCssVariables('font-size', theme.typeface.sizes);
+  return themeToCssVariables('font-size', theme.typography.sizes);
 }
 
 function FontWeights(theme: Theme) {
-  return themeToCssVariables('font', theme.typeface.weights);
-}
-
-function themeColorToCssVariables(name: string, range: ColorRange): string {
-  return themeToCssVariables(`color-${name}`, range);
+  return themeToCssVariables('font', theme.typography.weights);
 }
 
 function themeToCssVariables(prefix: string, obj: any) {
@@ -172,12 +159,23 @@ function themeToCssVariables(prefix: string, obj: any) {
   for (const key in obj) {
     // Converts key from camelcase to kebab case
     // https://gist.github.com/nblackburn/875e6ff75bc8ce171c758bf75f304707
-    const formattedKey = key
-      .replace(/\B(?:([A-Z])(?=[a-z]))|(?:(?<=[a-z0-9])([A-Z]))/g, '-$1$2')
-      .toLowerCase();
-    result += `--${prefix}-${formattedKey}: ${obj[key]};`;
+    result += themeItemToCssVariables(prefix, key, obj[key]);
   }
   return result;
+}
+
+function themeItemToCssVariables(prefix: string, key: string, value: any) {
+  const formattedKey = key
+    .replace(/\B(?:([A-Z])(?=[a-z]))|(?:(?<=[a-z0-9])([A-Z]))/g, '-$1$2')
+    .toLowerCase();
+  const result = `--${prefix}-${formattedKey}: ${value};`;
+  return result;
+}
+
+function paletteColorToCssVariables(paletteColor: PaletteColor) {
+  // Converts from camelcase to kebab case
+  // https://gist.github.com/nblackburn/875e6ff75bc8ce171c758bf75f304707
+  return themeItemToCssVariables('color', paletteColor.name, paletteColor.hsl);
 }
 
 export default Variables;
