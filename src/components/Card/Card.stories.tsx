@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 
 import { PassthroughProps } from '../../types';
+import { color } from '../../utils';
 
 import Card from './Card';
 import CardTypes from './Card.types';
@@ -48,4 +49,16 @@ Hoverable.args = {
   ...defaultArgs,
   hoverable: true,
   children: ExampleContent,
+};
+
+export const CustomStyle = Template.bind({});
+CustomStyle.args = {
+  ...defaultArgs,
+  children: ExampleContent,
+  hoverable: true,
+  style: {
+    width: '50%',
+    backgroundColor: color('primary'),
+    color: color('onPrimary'),
+  },
 };

@@ -8,8 +8,8 @@ export default function Card(props: CardTypes & PassthroughProps) {
   const Container = props.hoverable ? HoverableCardContainer : CardContainer;
 
   return (
-    <Wrapper {...props}>
-      <Container>
+    <Wrapper>
+      <Container {...props}>
         {props.title && <CardTitle {...props} />}
         {props.children}
       </Container>
@@ -25,7 +25,9 @@ function CardTitle(props: CardTypes) {
   );
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: fit-content;
+`;
 
 const CardContainer = styled.div`
   background-color: var(--color-surface);

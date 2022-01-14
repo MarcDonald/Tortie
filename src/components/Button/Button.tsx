@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { PassthroughProps } from '../../types';
-import { cssVar } from '../../utils';
+import { color, cssVar } from '../../utils';
 
 import ButtonTypes, { ButtonSize, ButtonVariant } from './Button.types';
 
@@ -10,11 +10,19 @@ export default function Button(props: ButtonTypes & PassthroughProps) {
 
   return props.variant === 'ghost' ? (
     <GhostButton {...props} onClick={onClick}>
-      <Text size={props.size}>{props.text}</Text>
+      {props.text ? (
+        <Text size={props.size}>{props.text}</Text>
+      ) : (
+        props.children
+      )}
     </GhostButton>
   ) : (
     <StyledButton {...props} onClick={onClick}>
-      <Text size={props.size}>{props.text}</Text>
+      {props.text ? (
+        <Text size={props.size}>{props.text}</Text>
+      ) : (
+        props.children
+      )}
     </StyledButton>
   );
 }
@@ -79,22 +87,22 @@ const Text = styled.span<{ size?: ButtonSize }>`
 function getBackgroundColor(variant: ButtonVariant): string {
   switch (variant) {
     case 'primary':
-      return cssVar('color-primary');
+      return color('primary');
     case 'secondary':
-      return cssVar('color-secondary');
+      return color('secondary');
     case 'ghost':
-      return cssVar('transparent');
+      return 'transparent';
   }
 }
 
 function getTextColor(variant: ButtonVariant): string {
   switch (variant) {
     case 'primary':
-      return cssVar('color-on-primary');
+      return color('primary');
     case 'secondary':
-      return cssVar('color-on-secondary');
+      return color('secondary');
     case 'ghost':
-      return cssVar('color-on-background');
+      return color('onBackground');
   }
 }
 

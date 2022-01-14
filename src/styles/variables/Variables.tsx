@@ -2,6 +2,7 @@ import { css } from 'styled-components';
 
 import { PaletteColor, Theme } from '../../types';
 import TypedPropsWithTheme from '../../types/TypedPropsWithTheme';
+import { camelToKebab } from '../../utils/FormatUtils';
 
 import { DefaultPixelBreakpoints, Device } from './Breakpoints';
 
@@ -157,25 +158,17 @@ function FontWeights(theme: Theme) {
 function themeToCssVariables(prefix: string, obj: any) {
   let result = '';
   for (const key in obj) {
-    // Converts key from camelcase to kebab case
-    // https://gist.github.com/nblackburn/875e6ff75bc8ce171c758bf75f304707
     result += themeItemToCssVariables(prefix, key, obj[key]);
   }
   return result;
 }
 
-function themeItemToCssVariables(prefix: string, key: string, value: any) {
-  const formattedKey = key
-    .replace(/\B(?:([A-Z])(?=[a-z]))|(?:(?<=[a-z0-9])([A-Z]))/g, '-$1$2')
-    .toLowerCase();
-  const result = `--${prefix}-${formattedKey}: ${value};`;
-  return result;
+function paletteColorToCssVariables(paletteColor: PaletteColor) {
+  return themeItemToCssVariables('color', paletteColor.name, paletteColor.hsl);
 }
 
-function paletteColorToCssVariables(paletteColor: PaletteColor) {
-  // Converts from camelcase to kebab case
-  // https://gist.github.com/nblackburn/875e6ff75bc8ce171c758bf75f304707
-  return themeItemToCssVariables('color', paletteColor.name, paletteColor.hsl);
+function themeItemToCssVariables(prefix: string, key: string, value: any) {
+  return `--${prefix}-${camelToKebab(key)}: ${value};`;
 }
 
 export default Variables;

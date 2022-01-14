@@ -1,7 +1,7 @@
 import styled, { useTheme } from 'styled-components';
 
 import { BaseColor, BaseColors, Theme } from '../../types';
-import { cssVar } from '../../utils';
+import { color } from '../../utils';
 
 export default function ThemeShowcase() {
   const theme: Theme = useTheme() as unknown as Theme;
@@ -11,38 +11,38 @@ export default function ThemeShowcase() {
       <Swatch>
         <ColorBox
           displayColor={theme.palette.core.primary.hsl}
-          textColor={cssVar('color-on-primary')}
+          textColor={color('onPrimary')}
           name={'Primary'}
         />
         <ColorBox
           displayColor={theme.palette.core.secondary.hsl}
-          textColor={cssVar('color-on-secondary')}
+          textColor={color('onSecondary')}
           name={'Secondary'}
         />
         <ColorBox
           displayColor={theme.palette.core.tertiary.hsl}
-          textColor={cssVar('color-on-tertiary')}
+          textColor={color('onTertiary')}
           name={'Tertiary'}
         />
         <ColorBox
           displayColor={theme.palette.core.error.hsl}
-          textColor={cssVar('color-on-error')}
+          textColor={color('onError')}
           name={'Error'}
         />
         <ColorBox
           displayColor={theme.palette.core.success.hsl}
-          textColor={cssVar('color-on-success')}
+          textColor={color('onSuccess')}
           name={'Success'}
         />
         <ColorBox
           displayColor={theme.palette.core.background.hsl}
-          textColor={cssVar('color-on-background')}
+          textColor={color('onBackground')}
           name={'Background'}
           border
         />
         <ColorBox
           displayColor={theme.palette.core.surface.hsl}
-          textColor={cssVar('color-on-surface')}
+          textColor={color('onSurface')}
           name={'Surface'}
           border
         />
@@ -129,7 +129,7 @@ function ColorBox(props: {
           margin: 4,
           fontSize: '1rem',
           textShadow: '1px 1px var(--color-black)',
-          color: props.textColor ?? cssVar('color-white'),
+          color: props.textColor ?? color('white'),
         }}
       >
         {props.name}
@@ -144,7 +144,8 @@ const ColorDisplay = styled.div<{ displayColor: string; border?: boolean }>`
   width: var(--size);
   background-color: ${(props) => props.displayColor};
   border-radius: var(--corner-radius-medium);
-  border: ${(props) => `1px solid ${props.border ? 'black' : 'transparent'}`};
+  border: ${(props) =>
+    `1px solid ${props.border ? color('black') : 'transparent'}`};
 
   will-change: transform;
   transition: ease-in-out 200ms;

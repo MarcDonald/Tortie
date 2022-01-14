@@ -100,28 +100,6 @@ export class PaletteColor {
   }
 }
 
-export interface Palette {
-  core: {
-    primary: PaletteColor;
-    secondary: PaletteColor;
-    tertiary: PaletteColor;
-    background: PaletteColor;
-    surface: PaletteColor;
-    success: PaletteColor;
-    error: PaletteColor;
-  };
-  typography: {
-    onBackground: PaletteColor;
-    onSurface: PaletteColor;
-    onPrimary: PaletteColor;
-    onSecondary: PaletteColor;
-    onTertiary: PaletteColor;
-    onError: PaletteColor;
-    onSuccess: PaletteColor;
-  };
-  base: BaseColors;
-}
-
 export interface Spacing {
   1: CssSizeValue;
   2: CssSizeValue;
@@ -135,7 +113,46 @@ export interface Spacing {
   10: CssSizeValue;
 }
 
+export type ColorType = 'base' | 'core' | 'typography';
+export type CoreColor =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'background'
+  | 'surface'
+  | 'success'
+  | 'error';
+export type TypographyColor =
+  | 'onPrimary'
+  | 'onSecondary'
+  | 'onTertiary'
+  | 'onBackground'
+  | 'onSurface'
+  | 'onSuccess'
+  | 'onError';
 export type BaseColor = 'gray' | 'blue' | 'red' | 'green' | 'white' | 'black';
+
+export interface Palette {
+  core: {
+    primary: PaletteColor;
+    secondary: PaletteColor;
+    tertiary: PaletteColor;
+    background: PaletteColor;
+    surface: PaletteColor;
+    success: PaletteColor;
+    error: PaletteColor;
+  };
+  typography: {
+    onPrimary: PaletteColor;
+    onSecondary: PaletteColor;
+    onTertiary: PaletteColor;
+    onBackground: PaletteColor;
+    onSurface: PaletteColor;
+    onSuccess: PaletteColor;
+    onError: PaletteColor;
+  };
+  base: BaseColors;
+}
 
 export interface BaseColors {
   gray: PaletteColor;

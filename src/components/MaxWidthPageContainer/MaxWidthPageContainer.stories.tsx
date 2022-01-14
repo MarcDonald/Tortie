@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 
-import { cssVar } from '../../utils';
+import { color } from '../../utils';
 
 import MaxWidthPageContainer from './MaxWidthPageContainer';
 import MaxWidthPageContainerTypes from './MaxWidthPageContainer.types';
@@ -19,12 +19,12 @@ const Template: Story<MaxWidthPageContainerTypes> = (args) => (
         height: '100%',
         display: 'grid',
         placeItems: 'center',
-        backgroundColor: cssVar('color-surface'),
+        backgroundColor: color('surface'),
       }}
     >
       <h1
         style={{
-          color: cssVar('color-on-surface'),
+          color: color('surface'),
         }}
       >
         Contained Content
