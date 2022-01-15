@@ -1,7 +1,8 @@
 import { Meta, Story } from '@storybook/react';
 
 import { PassthroughProps } from '../../types';
-import { color } from '../../utils';
+import { color, cssVar } from '../../utils';
+import { Button } from '../index';
 
 import Card from './Card';
 import CardTypes from './Card.types';
@@ -29,36 +30,61 @@ const ExampleContent = (
       photonic. Pathway of a ship-wide shield, gather the paralysis! None of
       these sonic showers will be lost in pressures like galaxies in courages
     </p>
-    <p>
-      Countless definitions will be lost in modifications like metamorphosis in
-      mankinds. All those minds will be lost in courages like voyages in
-      adventures the teleporter is more nanomachine now than phenomenan. Vital
-      and unearthly unrelated.
-    </p>
+    <div style={{ display: 'grid', placeContent: 'center' }}>
+      <img
+        src={'https://placekitten.com/250/250'}
+        alt={'Example'}
+        style={{
+          borderRadius: cssVar('corner-radius-medium'),
+        }}
+      />
+    </div>
+    <div
+      style={{
+        margin: `${cssVar('spacing-3')} ${cssVar('spacing-4')}`,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Button onClick={() => {}} text={'Delete'} variant={'negative'} />
+      <Button onClick={() => {}} text={'Continue'} variant={'positive'} />
+    </div>
   </div>
 );
 
 export const Static = Template.bind({});
 Static.args = {
   ...defaultArgs,
-  children: ExampleContent,
+  content: 'The lieutenant commander goes mankind like a lunar transporter!',
 };
 
 export const Hoverable = Template.bind({});
 Hoverable.args = {
   ...defaultArgs,
   hoverable: true,
+  content: 'Captain of a unrelated metamorphosis, desire the paralysis!',
+};
+
+export const CustomChild = Template.bind({});
+CustomChild.args = {
+  ...defaultArgs,
   children: ExampleContent,
 };
 
 export const CustomStyle = Template.bind({});
 CustomStyle.args = {
   ...defaultArgs,
-  children: ExampleContent,
+  cardAs: 'aside',
+  titleAs: 'h3',
+  content:
+    'Intelligent, evil transformators rudely grab a reliable, unrelated space.',
+  contentAs: 'h6',
   hoverable: true,
   style: {
     width: '50%',
     backgroundColor: color('primary'),
     color: color('onPrimary'),
+    padding: '2rem',
   },
 };

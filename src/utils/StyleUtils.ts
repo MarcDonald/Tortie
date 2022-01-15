@@ -39,8 +39,8 @@ export function colorA(
   }
 }
 
-export function adjustLightness(color: PaletteColor, lightness: number) {
-  validateRange(lightness, -100, 100, 'lightness');
+export function adjustLightness(color: PaletteColor, adjustment: number) {
+  validateRange(adjustment, -100, 100, 'lightness');
 
-  return `hsl(${color.hue}deg, ${color.saturation}%, calc(${color.lightness}% + ${lightness}%));`;
+  return `hsl(${color.hue}deg, ${color.saturation}%, calc(${color.lightness}% + ${adjustment}%));`;
 }

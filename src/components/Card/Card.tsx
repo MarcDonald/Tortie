@@ -9,19 +9,21 @@ export default function Card(props: CardTypes & PassthroughProps) {
 
   return (
     <Wrapper>
-      <Container {...props}>
-        {props.title && <CardTitle {...props} />}
-        {props.children}
+      <Container as={props.cardAs} {...props}>
+        {props.title && (
+          <TitleWrapper>
+            <Title as={props.titleAs}>{props.title}</Title>
+          </TitleWrapper>
+        )}
+        {props.content ? (
+          <ContentWrapper>
+            <Content as={props.contentAs}>{props.content}</Content>
+          </ContentWrapper>
+        ) : (
+          props.children
+        )}
       </Container>
     </Wrapper>
-  );
-}
-
-function CardTitle(props: CardTypes) {
-  return (
-    <CardTitleWrapper>
-      <Title as={props.titleAs}>{props.title}</Title>
-    </CardTitleWrapper>
   );
 }
 
@@ -29,29 +31,33 @@ const Wrapper = styled.div`
   width: fit-content;
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.article`
   background-color: var(--color-surface);
   border-radius: var(--corner-radius-medium);
   margin: var(--spacing-2);
   padding: var(--spacing-4);
-  box-shadow: var(--shadow-on-background-elevation-low);
+  box-shadow: var(--shadow-elevation-low);
 `;
 
 const HoverableCardContainer = styled(CardContainer)`
   will-change: transform;
-  transition: ease-in-out 400ms;
+  transition: ease-in-out 300ms;
 
   ${Wrapper}:hover & {
     transform: translateY(-4px);
-    transition: ease-in-out 250ms;
-    box-shadow: var(--shadow-on-background-elevation-medium);
+    transition: ease-in-out 200ms;
+    box-shadow: var(--shadow-elevation-medium);
   }
 `;
 
-const CardTitleWrapper = styled.div`
-  border-bottom: 1px solid var(--color-gray-30);
+const TitleWrapper = styled.div`
   margin: var(--spacing-3) 0;
-  padding-bottom: var(--spacing-3);
 `;
 
 const Title = styled.h5``;
+
+const ContentWrapper = styled.div`
+  width: fit-content;
+`;
+
+const Content = styled.p``;
