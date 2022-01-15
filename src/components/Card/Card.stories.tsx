@@ -95,6 +95,7 @@ CustomStyle.args = {
   hoverable: true,
   style: {
     width: '50%',
+    margin: 'auto',
     backgroundColor: color('primary'),
     color: color('onPrimary'),
     padding: '2rem',

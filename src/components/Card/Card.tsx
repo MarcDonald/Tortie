@@ -8,30 +8,25 @@ export default function Card(props: CardTypes & PassthroughProps) {
   const Container = props.hoverable ? HoverableCardContainer : CardContainer;
 
   return (
-    <Wrapper>
-      <Container as={props.cardAs} {...props}>
-        {props.title && (
-          <TitleWrapper>
-            <Title as={props.titleAs}>{props.title}</Title>
-          </TitleWrapper>
-        )}
-        {props.content ? (
-          <ContentWrapper>
-            <Content as={props.contentAs}>{props.content}</Content>
-          </ContentWrapper>
-        ) : (
-          props.children
-        )}
-      </Container>
-    </Wrapper>
+    <Container as={props.cardAs} {...props}>
+      {props.title && (
+        <TitleWrapper>
+          <Title as={props.titleAs}>{props.title}</Title>
+        </TitleWrapper>
+      )}
+      {props.content ? (
+        <ContentWrapper>
+          <Content as={props.contentAs}>{props.content}</Content>
+        </ContentWrapper>
+      ) : (
+        props.children
+      )}
+    </Container>
   );
 }
 
-const Wrapper = styled.div`
-  width: fit-content;
-`;
-
 const CardContainer = styled.article`
+  width: fit-content;
   background-color: var(--color-surface);
   border-radius: var(--corner-radius-medium);
   margin: var(--spacing-2);
@@ -44,7 +39,7 @@ const HoverableCardContainer = styled(CardContainer)`
     will-change: transform;
     transition: ease-in-out 300ms;
 
-    ${Wrapper}:hover & {
+    :hover {
       transform: translateY(-4px);
       transition: ease-in-out 200ms;
       box-shadow: var(--shadow-elevation-medium);
