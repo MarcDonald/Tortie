@@ -36,11 +36,25 @@ Secondary.args = {
   variant: 'secondary',
 };
 
-export const Ghost = Template.bind({});
-Ghost.args = {
+export const Negative = Template.bind({});
+Negative.args = {
   ...defaultArgs,
-  text: 'Click me!',
-  variant: 'ghost',
+  text: 'This will delete your account!',
+  variant: 'negative',
+};
+
+export const Positive = Template.bind({});
+Positive.args = {
+  ...defaultArgs,
+  text: 'Create!',
+  variant: 'positive',
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  ...defaultArgs,
+  text: `You can't click me!`,
+  disabled: true,
 };
 
 export const CustomStyle = Template.bind({});
@@ -48,18 +62,23 @@ CustomStyle.args = {
   ...defaultArgs,
   text: 'Click me!',
   style: {
-    width: '50%',
-    backgroundColor: color('blue'),
-    margin: '2rem',
-    padding: '2rem',
     fontFamily: 'monospace',
+    width: '50%',
+    margin: '2rem',
+    padding: '2rem 3rem',
   },
+  foregroundColor: color('red'),
+  backgroundColor: color('blue'),
 };
 
 const ExampleContent = (
   <div>
-    <h5 style={{ paddingBottom: cssVar('spacing-4') }}>Cat</h5>
-    <img src={'http://placekitten.com/150/150'} alt={'Example'} />
+    <h5 style={{ paddingBottom: cssVar('spacing-4') }}>A Cute Cat</h5>
+    <img
+      src={'https://placekitten.com/250/250'}
+      alt={'Example'}
+      style={{ borderRadius: cssVar('corner-radius-medium') }}
+    />
   </div>
 );
 

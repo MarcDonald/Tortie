@@ -3,10 +3,12 @@ import {
   ColorType,
   CoreColor,
   Palette,
+  PaletteColor,
   TypographyColor,
 } from '../types';
 
 import { camelToKebab } from './FormatUtils';
+import { validateRange } from './ValidationUtils';
 
 export function cssVar(value: string): string {
   return `var(--${value})`;
@@ -35,4 +37,10 @@ export function colorA(
       throw new Error(`${color} is not a ${colorType} color`);
     }
   }
+}
+
+export function adjustLightness(color: PaletteColor, lightness: number) {
+  validateRange(lightness, -100, 100, 'lightness');
+
+  return `hsl(${color.hue}deg, ${color.saturation}%, calc(${color.lightness}% + ${lightness}%));`;
 }

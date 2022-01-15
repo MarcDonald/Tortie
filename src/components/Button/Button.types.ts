@@ -1,5 +1,5 @@
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'negative' | 'positive';
 
 export default interface ButtonTypes {
   text?: string;
@@ -7,4 +7,6 @@ export default interface ButtonTypes {
   size?: ButtonSize;
   variant?: ButtonVariant;
   disabled?: boolean;
+  backgroundColor?: string;
+  foregroundColor?: string;
 }
