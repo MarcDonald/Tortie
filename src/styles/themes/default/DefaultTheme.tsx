@@ -109,9 +109,9 @@ export const DefaultThemeLight: Theme = {
       ),
       onSuccess: new PaletteColor(
         'onSuccess',
-        black.hue,
-        black.saturation,
-        black.lightness
+        white.hue,
+        white.saturation,
+        white.lightness
       ),
     },
     base: {
