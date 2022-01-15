@@ -47,8 +47,20 @@ const ExampleContent = (
         justifyContent: 'space-between',
       }}
     >
-      <Button onClick={() => {}} text={'Delete'} variant={'negative'} />
-      <Button onClick={() => {}} text={'Continue'} variant={'positive'} />
+      <Button
+        onClick={() => {
+          console.log('Delete');
+        }}
+        text={'Delete'}
+        variant={'negative'}
+      />
+      <Button
+        onClick={() => {
+          console.log('Continue');
+        }}
+        text={'Continue'}
+        variant={'positive'}
+      />
     </div>
   </div>
 );

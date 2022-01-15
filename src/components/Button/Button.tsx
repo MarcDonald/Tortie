@@ -90,17 +90,24 @@ const Front = styled.span<
 
   will-change: transform;
   transform: translateY(-2px);
-  transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
-    background-color 250ms;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
+      background-color 250ms;
+  }
 
   ${StyledButton}:hover:not(${StyledButton}:disabled) & {
     transform: translateY(-6px);
-    transition: transform 300ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+    @media (prefers-reduced-motion: no-preference) {
+      transition: transform 300ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
+    }
   }
 
   ${StyledButton}:active:not(${StyledButton}:disabled) & {
     transform: translateY(-2px);
-    transition: transform 30ms;
+    @media (prefers-reduced-motion: no-preference) {
+      transition: transform 30ms;
+    }
   }
 
   ${StyledButton}:disabled & {

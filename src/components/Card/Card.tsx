@@ -40,13 +40,15 @@ const CardContainer = styled.article`
 `;
 
 const HoverableCardContainer = styled(CardContainer)`
-  will-change: transform;
-  transition: ease-in-out 300ms;
+  @media (prefers-reduced-motion: no-preference) {
+    will-change: transform;
+    transition: ease-in-out 300ms;
 
-  ${Wrapper}:hover & {
-    transform: translateY(-4px);
-    transition: ease-in-out 200ms;
-    box-shadow: var(--shadow-elevation-medium);
+    ${Wrapper}:hover & {
+      transform: translateY(-4px);
+      transition: ease-in-out 200ms;
+      box-shadow: var(--shadow-elevation-medium);
+    }
   }
 `;
 
