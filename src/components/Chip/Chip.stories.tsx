@@ -46,6 +46,12 @@ Good.args = {
   variant: 'positive',
 };
 
+export const Disabled = Template.bind({});
+Disabled.args = {
+  text: 'Nope',
+  disabled: true,
+};
+
 export const CustomColor = Template.bind({});
 CustomColor.args = {
   text: 'Custom Chip!',

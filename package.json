@@ -1,7 +1,7 @@
 {
   "name": "tortie",
-  "version": "1.0.0-alpha08.1",
-  "description": "Components and Convenience for React",
+  "version": "1.0.0-alpha08.2",
+  "description": "React component library",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index",
@@ -31,7 +31,7 @@
   "bugs": {
     "url": "https://github.com/MarcDonald/tortie/issues"
   },
-  "homepage": "https://github.com/MarcDonald/tortie#readme",
+  "homepage": "https://tortie.dev",
   "devDependencies": {
     "@babel/core": "7.16.5",
     "@rollup/plugin-commonjs": "21.0.1",

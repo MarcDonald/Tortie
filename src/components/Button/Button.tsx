@@ -59,7 +59,8 @@ const StyledButton = styled.button<{
     outline: none;
   }
 
-  :hover:not(:disabled) {
+  :hover:not(:disabled),
+  :focus:not(:disabled) {
     transition: filter 250ms;
     filter: brightness(110%);
   }
@@ -89,14 +90,15 @@ const Front = styled.span<
   font-size: ${({ size }) => getFontSize(size)};
 
   will-change: transform;
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 
   @media (prefers-reduced-motion: no-preference) {
     transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1),
       background-color 250ms;
   }
 
-  ${StyledButton}:hover:not(${StyledButton}:disabled) & {
+  ${StyledButton}:hover:not(${StyledButton}:disabled) &,
+  ${StyledButton}:focus:not(${StyledButton}:disabled) & {
     transform: translateY(-6px);
     @media (prefers-reduced-motion: no-preference) {
       transition: transform 300ms cubic-bezier(0.3, 0.7, 0.4, 1.5);
@@ -127,7 +129,8 @@ const Shadow = styled.span<{ size: ButtonSize }>`
   background: hsl(0deg 0% 0% / 0.25);
   transform: translateY(2px);
 
-  ${StyledButton}:hover:not(${StyledButton}:disabled) & {
+  ${StyledButton}:hover:not(${StyledButton}:disabled) &,
+  ${StyledButton}:focus:not(${StyledButton}:disabled) & {
     transform: translateY(4px);
   }
 

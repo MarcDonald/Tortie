@@ -9,9 +9,11 @@ export default interface ChipTypes {
   text?: string;
   variant?: ChipVariant;
   colors?: {
-    backgroundColor: string;
-    hoverColor: string;
-    borderColor: string;
-    textColor: string;
+    backgroundColor?: string;
+    hoverColor?: string;
+    borderColor?: string;
+    textColor?: string;
   };
+  onClick?: () => void;
+  disabled?: boolean;
 }

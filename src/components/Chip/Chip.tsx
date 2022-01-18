@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { PaletteColor, PassthroughProps, Theme } from '../../types';
-import { adjustLightness } from '../../utils';
 
 import ChipTypes, { ChipVariant } from './Chip.types';
 
@@ -15,10 +14,7 @@ const StyledButton = styled.button<ChipTypes>`
 
   padding: var(--spacing-3);
   border-radius: var(--corner-radius-large);
-  border-width: 2px;
-  border-style: dashed;
-  border-color: ${({ variant, theme, colors }) =>
-    getBorderColor(variant, theme, colors?.borderColor)};
+  border: none;
   font-size: var(--font-size-2);
   margin: var(--spacing-1);
   color: ${({ variant, colors, theme }) =>
@@ -26,14 +22,16 @@ const StyledButton = styled.button<ChipTypes>`
   background-color: ${({ variant, colors, theme }) =>
     getBackgroundColor(variant, theme, false, colors?.backgroundColor)};
 
-  transition: background-color 400ms;
+  transition: background-color 500ms, border-radius 500ms, filter 500ms;
 
-  :hover {
-    transition: background-color 200ms;
-    cursor: pointer;
+  :hover,
+  :focus {
+    transition: background-color 250ms, border-radius 250ms, filter 250ms;
     background-color: ${({ variant, colors, theme }) =>
       getBackgroundColor(variant, theme, true, colors?.hoverColor)};
-    border-style: solid;
+    border: none;
+    border-radius: var(--corner-radius-small);
+    filter: brightness(110%);
   }
 `;
 
@@ -47,27 +45,7 @@ function getBackgroundColor(
     return backgroundColor;
   }
 
-  const variantColor = mapVariantColor(variant, theme);
-
-  if (hover) {
-    return variantColor.hsl;
-  } else {
-    return adjustLightness(
-      variantColor,
-      variantColor.lightness < 10 ? 10 : -10
-    );
-  }
-}
-
-function getBorderColor(
-  variant: ChipVariant | undefined,
-  theme: Theme,
-  borderColor?: string
-): string {
-  if (borderColor) return borderColor;
-
-  const variantColor = mapVariantColor(variant, theme);
-  return adjustLightness(variantColor, variantColor.lightness < 30 ? 30 : -20);
+  return mapVariantColor(variant, theme).hsla(0.8);
 }
 
 function getTextColor(
