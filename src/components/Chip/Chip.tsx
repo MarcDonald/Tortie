@@ -1,96 +1,163 @@
 import styled from 'styled-components';
 
-import { PaletteColor, PassthroughProps, Theme } from '../../types';
+import { PassthroughProps, Theme } from '../../types';
+import { color, colorA } from '../../utils';
+import { ButtonSize } from '../Button/Button.types';
 
 import ChipTypes, { ChipVariant } from './Chip.types';
 
 export default function Chip(props: ChipTypes & PassthroughProps) {
-  return <StyledButton {...props}>{props.children ?? props.text}</StyledButton>;
+  return (
+    <Container {...props} variant={props.variant}>
+      <Shadow size={props.size ?? 'medium'} />
+      <Background
+        variant={props.variant}
+        backgroundColor={props.colors?.backgroundColor}
+      />
+      <Front
+        {...props}
+        variant={props.variant}
+        foregroundColor={props.colors?.foregroundColor}
+        textColor={props.colors?.textColor}
+      >
+        {props.children ? props.children : props.text}
+      </Front>
+    </Container>
+  );
 }
 
-const StyledButton = styled.button<ChipTypes>`
-  display: block;
-  width: fit-content;
+const Container = styled.span<{
+  variant?: ChipVariant;
+  disabled?: boolean;
+}>`
+  // !important because it needs to be static behind the front
+  padding: 0 !important;
 
-  padding: var(--spacing-3);
+  width: fit-content;
+  display: block;
+  position: relative;
+  background: transparent;
   border-radius: var(--corner-radius-large);
   border: none;
-  font-size: var(--font-size-2);
-  margin: var(--spacing-1);
-  color: ${({ variant, colors, theme }) =>
-    getTextColor(variant, theme, colors?.textColor)};
-  background-color: ${({ variant, colors, theme }) =>
-    getBackgroundColor(variant, theme, false, colors?.backgroundColor)};
+  opacity: 80%;
 
-  transition: background-color 500ms, border-radius 500ms, filter 500ms;
-
-  :hover,
-  :focus {
-    transition: background-color 250ms, border-radius 250ms, filter 250ms;
-    background-color: ${({ variant, colors, theme }) =>
-      getBackgroundColor(variant, theme, true, colors?.hoverColor)};
-    border: none;
-    border-radius: var(--corner-radius-small);
-    filter: brightness(110%);
-  }
+  ${({ disabled }) => {
+    if (disabled) {
+      return 'filter: grayscale(75%); cursor: not-allowed; opacity: 60%;';
+    }
+  }}
 `;
 
-function getBackgroundColor(
+const Front = styled.span<
+  {
+    variant?: ChipVariant;
+    foregroundColor?: string;
+    textColor?: string;
+  } & PassthroughProps
+>`
+  // !important because otherwise it will not match the back
+  width: 100% !important;
+  margin: 0 !important;
+
+  display: block;
+  padding: var(--spacing-2);
+  border-radius: var(--corner-radius-large);
+  color: ${({ variant, theme, textColor }) =>
+    getTextColor(variant, theme, textColor)};
+  background-color: ${({ variant, theme, foregroundColor }) =>
+    getForegroundColor(variant, theme, foregroundColor)};
+  font-size: var(--font-size-1);
+  transform: translateY(-1px);
+`;
+
+function getForegroundColor(
   variant: ChipVariant | undefined,
   theme: Theme,
-  hover: boolean,
-  backgroundColor?: string
+  foregroundColor: string | undefined
 ): string {
-  if (backgroundColor) {
-    return backgroundColor;
+  if (foregroundColor) return foregroundColor;
+  switch (variant) {
+    case 'primary':
+      return color('primary');
+    case 'secondary':
+      return color('secondary');
+    case 'tertiary':
+      return color('tertiary');
+    case 'negative':
+      return color('error');
+    case 'positive':
+      return color('success');
+    default:
+      return color('primary');
   }
-
-  return mapVariantColor(variant, theme).hsla(0.8);
 }
 
 function getTextColor(
   variant: ChipVariant | undefined,
   theme: Theme,
-  textColor?: string
+  textColor: string | undefined
 ): string {
-  if (textColor) {
-    return textColor;
-  } else if (variant) {
-    switch (variant) {
-      case 'primary':
-        return theme.palette.typography.onPrimary.hsl;
-      case 'secondary':
-        return theme.palette.typography.onSecondary.hsl;
-      case 'tertiary':
-        return theme.palette.typography.onTertiary.hsl;
-      case 'negative':
-        return theme.palette.typography.onError.hsl;
-      case 'positive':
-        return theme.palette.typography.onSuccess.hsl;
-    }
-  } else {
-    return theme.palette.typography.onPrimary.hsl;
+  if (textColor) return textColor;
+  switch (variant) {
+    case 'primary':
+      return color('onPrimary');
+    case 'secondary':
+      return color('onSecondary');
+    case 'tertiary':
+      return color('onTertiary');
+    case 'negative':
+      return color('onError');
+    case 'positive':
+      return color('onSuccess');
+    default:
+      return color('onPrimary');
   }
 }
 
-function mapVariantColor(
+const Shadow = styled.span<{ size: ButtonSize }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--corner-radius-large);
+  filter: blur(4px);
+  background: hsl(0deg 0% 0% / 0.25);
+  transform: translateY(2px);
+`;
+
+const Background = styled.span<{
+  variant?: ChipVariant;
+  backgroundColor?: string;
+}>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--corner-radius-large);
+  background-color: ${({ variant, theme, backgroundColor }) =>
+    getBackgroundColor(variant, theme, backgroundColor)};
+`;
+
+function getBackgroundColor(
   variant: ChipVariant | undefined,
-  theme: Theme
-): PaletteColor {
-  if (variant) {
-    switch (variant) {
-      case 'primary':
-        return theme.palette.core.primary;
-      case 'secondary':
-        return theme.palette.core.secondary;
-      case 'tertiary':
-        return theme.palette.core.tertiary;
-      case 'negative':
-        return theme.palette.core.error;
-      case 'positive':
-        return theme.palette.core.success;
-    }
-  } else {
-    return theme.palette.core.primary;
+  theme: Theme,
+  backgroundColor: string | undefined
+): string {
+  if (backgroundColor) return backgroundColor;
+  switch (variant) {
+    case 'primary':
+      return color('secondary');
+    case 'secondary':
+      return color('tertiary');
+    case 'tertiary':
+      return colorA('tertiary', 'core', 0.6, theme.palette);
+    case 'negative':
+      return colorA('error', 'core', 0.6, theme.palette);
+    case 'positive':
+      return colorA('success', 'core', 0.6, theme.palette);
+    default:
+      return color('secondary');
   }
 }

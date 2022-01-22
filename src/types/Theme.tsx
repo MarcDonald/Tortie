@@ -1,20 +1,40 @@
-import { BreakpointTypes } from '../styles';
-import { validateRange } from '../utils';
+import { BreakpointTypes } from './Breakpoints';
+import PaletteColor from './PaletteColor';
 
-type CssSizeValue = string | number;
+export interface Theme {
+  dimensions: DimensionsValues;
+  typography: TypographyValues;
+  breakpoints: BreakpointTypes<string | number>;
+  palette: Palette;
+}
 
-export interface Dimensions {
-  cornerRadius: {
-    small: CssSizeValue;
-    medium: CssSizeValue;
-    large: CssSizeValue;
-    round: CssSizeValue;
-  };
-  spacing: Spacing;
+export interface DimensionsValues {
+  phone: BreakpointDimensionValues;
+  tablet: BreakpointDimensionValues;
+  laptop: BreakpointDimensionValues;
+  desktop: BreakpointDimensionValues;
+  largeDesktop: BreakpointDimensionValues;
+}
+
+export interface BreakpointDimensionValues {
+  cornerRadius: CornerRadiusValues;
+  spacing: SpacingValues;
   maxPageWidth: CssSizeValue;
 }
 
-export interface FontSizes {
+export interface CornerRadiusValues {
+  small: CssSizeValue;
+  medium: CssSizeValue;
+  large: CssSizeValue;
+  round: CssSizeValue;
+}
+
+export interface TypographyValues {
+  weights: FontWeightValues;
+  sizes: FontSizeValues;
+}
+
+export interface FontSizeValues {
   1: string;
   2: string;
   3: string;
@@ -27,7 +47,7 @@ export interface FontSizes {
   10: string;
 }
 
-export interface FontWeights {
+export interface FontWeightValues {
   thin: number;
   normal: number;
   medium: number;
@@ -35,72 +55,7 @@ export interface FontWeights {
   bold: number;
 }
 
-export interface Theme {
-  dimensions: {
-    phone: Dimensions;
-    tablet: Dimensions;
-    laptop: Dimensions;
-    desktop: Dimensions;
-    largeDesktop: Dimensions;
-  };
-  typography: {
-    weights: FontWeights;
-    sizes: FontSizes;
-  };
-  breakpoints: BreakpointTypes<string | number>;
-  palette: Palette;
-}
-
-export class PaletteColor {
-  constructor(
-    readonly name: string,
-    readonly hue: number,
-    readonly saturation: number,
-    readonly lightness: number
-  ) {
-    PaletteColor.validateName(name);
-    this.validateHue();
-    PaletteColor.validatePercentage(saturation, 'saturation');
-    PaletteColor.validatePercentage(lightness, 'lightness');
-    this.name = name;
-    this.hue = hue;
-    this.saturation = saturation;
-    this.lightness = lightness;
-  }
-
-  private static validateName(name: string) {
-    if (!name || name === '') {
-      throw new Error('You must supply a name');
-    }
-  }
-
-  private static validatePercentage(percentage: number, fieldName: string) {
-    validateRange(percentage, 0, 100, fieldName);
-  }
-
-  private validateHue() {
-    validateRange(this.hue, 0, 360, 'hue');
-  }
-
-  get rawHslValues(): string {
-    return `${this.hue}deg, ${this.saturation}%, ${this.lightness}%`;
-  }
-
-  get hsl(): string {
-    return `hsl(${this.rawHslValues})`;
-  }
-
-  public hsla(alpha: number) {
-    validateRange(alpha, 0, 1, 'alpha');
-    return `hsla(${this.rawHslValues}, ${alpha})`;
-  }
-
-  public toString(): string {
-    return this.hsl;
-  }
-}
-
-export interface Spacing {
+export interface SpacingValues {
   1: CssSizeValue;
   2: CssSizeValue;
   3: CssSizeValue;
@@ -113,48 +68,33 @@ export interface Spacing {
   10: CssSizeValue;
 }
 
-export type ColorType = 'base' | 'core' | 'typography';
-export type CoreColor =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'background'
-  | 'surface'
-  | 'success'
-  | 'error';
-export type TypographyColor =
-  | 'onPrimary'
-  | 'onSecondary'
-  | 'onTertiary'
-  | 'onBackground'
-  | 'onSurface'
-  | 'onSuccess'
-  | 'onError';
-export type BaseColor = 'gray' | 'blue' | 'red' | 'green' | 'white' | 'black';
-
 export interface Palette {
-  core: {
-    primary: PaletteColor;
-    secondary: PaletteColor;
-    tertiary: PaletteColor;
-    background: PaletteColor;
-    surface: PaletteColor;
-    success: PaletteColor;
-    error: PaletteColor;
-  };
-  typography: {
-    onPrimary: PaletteColor;
-    onSecondary: PaletteColor;
-    onTertiary: PaletteColor;
-    onBackground: PaletteColor;
-    onSurface: PaletteColor;
-    onSuccess: PaletteColor;
-    onError: PaletteColor;
-  };
-  base: BaseColors;
+  core: CorePalette;
+  typography: TypographyPalette;
+  base: BaseColorPalette;
 }
 
-export interface BaseColors {
+export interface CorePalette {
+  primary: PaletteColor;
+  secondary: PaletteColor;
+  tertiary: PaletteColor;
+  background: PaletteColor;
+  surface: PaletteColor;
+  success: PaletteColor;
+  error: PaletteColor;
+}
+
+export interface TypographyPalette {
+  onPrimary: PaletteColor;
+  onSecondary: PaletteColor;
+  onTertiary: PaletteColor;
+  onBackground: PaletteColor;
+  onSurface: PaletteColor;
+  onSuccess: PaletteColor;
+  onError: PaletteColor;
+}
+
+export interface BaseColorPalette {
   gray: PaletteColor;
   red: PaletteColor;
   green: PaletteColor;
@@ -162,3 +102,16 @@ export interface BaseColors {
   white: PaletteColor;
   black: PaletteColor;
 }
+
+export type ColorType = keyof Palette;
+export type CoreColor = keyof CorePalette;
+export type TypographyColor = keyof TypographyPalette;
+export type BaseColor = keyof BaseColorPalette;
+export type Spacing = keyof SpacingValues;
+export type CornerRadius = keyof CornerRadiusValues;
+export type Typography = keyof TypographyValues;
+export type Dimensions = keyof DimensionsValues;
+export type BreakpointDimensions = keyof BreakpointDimensionValues;
+export type FontSize = keyof FontSizeValues;
+export type FontWeight = keyof FontWeightValues;
+export type CssSizeValue = string | number;

@@ -1,10 +1,9 @@
 import { css } from 'styled-components';
 
 import { PaletteColor, Theme } from '../../types';
+import { DefaultPixelBreakpoints, Device } from '../../types/Breakpoints';
 import TypedPropsWithTheme from '../../types/TypedPropsWithTheme';
 import { camelToKebab } from '../../utils/FormatUtils';
-
-import { DefaultPixelBreakpoints, Device } from './Breakpoints';
 
 const Variables = css`
   html {

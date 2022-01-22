@@ -10,13 +10,9 @@ export default function Button(props: ButtonTypes & PassthroughProps) {
   const defaultVariant: ButtonVariant = 'primary';
 
   return (
-    <StyledButton
-      {...props}
-      variant={props.variant ?? defaultVariant}
-      size={props.size ?? defaultSize}
-    >
+    <StyledButton {...props} variant={props.variant ?? defaultVariant}>
       <Shadow size={props.size ?? 'medium'} />
-      <Edge
+      <Background
         variant={props.variant ?? defaultVariant}
         size={props.size ?? defaultSize}
         backgroundColor={props.backgroundColor}
@@ -35,7 +31,6 @@ export default function Button(props: ButtonTypes & PassthroughProps) {
 }
 
 const StyledButton = styled.button<{
-  size: ButtonSize;
   variant: ButtonVariant;
 }>`
   // !important because it needs to be static behind the front
@@ -139,7 +134,7 @@ const Shadow = styled.span<{ size: ButtonSize }>`
   }
 `;
 
-const Edge = styled.span<{
+const Background = styled.span<{
   size: ButtonSize;
   variant: ButtonVariant;
   backgroundColor?: string;

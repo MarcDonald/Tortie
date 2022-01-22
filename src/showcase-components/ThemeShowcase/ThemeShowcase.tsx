@@ -1,6 +1,6 @@
 import styled, { useTheme } from 'styled-components';
 
-import { BaseColor, BaseColors, Theme } from '../../types';
+import { BaseColor, BaseColorPalette, Theme } from '../../types';
 import { color } from '../../utils';
 
 export default function ThemeShowcase() {
@@ -90,7 +90,10 @@ function ColorSwatchesForPalette({ colorPalette }: { colorPalette: any }) {
   return <>{swatches.map((swatch) => swatch)}</>;
 }
 
-function ColorSwatchRow(props: { colorName: BaseColor; colors: BaseColors }) {
+function ColorSwatchRow(props: {
+  colorName: BaseColor;
+  colors: BaseColorPalette;
+}) {
   const loopArray: number[] = new Array(10);
   for (let i = 1; i <= 10; i++) {
     loopArray[i] = i / 10;

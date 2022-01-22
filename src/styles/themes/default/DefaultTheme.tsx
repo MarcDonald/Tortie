@@ -1,4 +1,4 @@
-import { PaletteColor, Spacing, Theme } from '../../../types';
+import { PaletteColor, SpacingValues, Theme } from '../../../types';
 import { DefaultBreakpoints } from '../../variables';
 
 const cornerRadius = {
@@ -8,7 +8,7 @@ const cornerRadius = {
   round: '99999px',
 };
 
-const spacing: Spacing = {
+const spacing: SpacingValues = {
   1: '4px',
   2: '8px',
   3: '12px',

@@ -12,8 +12,22 @@ export default {
   argTypes: {},
 } as Meta<typeof Chip>;
 
-const Template: Story<ChipTypes & PassthroughProps> = (args) => (
+type Args = ChipTypes & PassthroughProps;
+
+const Template: Story<ChipTypes & PassthroughProps> = (args: Args) => (
   <Chip {...args} />
+);
+
+const MultipleTemplate: Story<{
+  first?: Args;
+  second?: Args;
+  third?: Args;
+}> = (args) => (
+  <div style={{ display: 'flex', gap: '8px' }}>
+    {args.first && <Chip {...args.first} />}
+    {args.second && <Chip {...args.second} />}
+    {args.third && <Chip {...args.third} />}
+  </div>
 );
 
 export const Primary = Template.bind({});
@@ -46,20 +60,39 @@ Good.args = {
   variant: 'positive',
 };
 
-export const Disabled = Template.bind({});
+export const Disabled = MultipleTemplate.bind({});
 Disabled.args = {
-  text: 'Nope',
-  disabled: true,
+  first: {
+    variant: 'primary',
+    text: 'Primary',
+    disabled: true,
+  },
+  second: {
+    variant: 'secondary',
+    text: 'Secondary',
+    disabled: true,
+  },
+  third: {
+    variant: 'tertiary',
+    text: 'Tertiary',
+    disabled: true,
+  },
 };
 
-export const CustomColor = Template.bind({});
-CustomColor.args = {
+export const CustomStyle = Template.bind({});
+CustomStyle.args = {
   text: 'Custom Chip!',
+  style: {
+    fontFamily: 'monospace',
+    fontSize: '3rem',
+    width: '50%',
+    margin: '2rem',
+    padding: '2rem 3rem',
+  },
   colors: {
-    backgroundColor: color('background'),
-    hoverColor: color('surface'),
-    borderColor: color('blue'),
-    textColor: color('onBackground'),
+    foregroundColor: color('green'),
+    backgroundColor: color('blue'),
+    textColor: color('white'),
   },
 };
 

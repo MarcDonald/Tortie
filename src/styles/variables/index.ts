@@ -1,2 +1,2 @@
 export { default as Variables } from './Variables';
-export * from './Breakpoints';
+export * from '../../types/Breakpoints';

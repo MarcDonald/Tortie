@@ -3,9 +3,9 @@ import {
   ColorType,
   CoreColor,
   Palette,
-  PaletteColor,
   TypographyColor,
 } from '../types';
+import PaletteColor from '../types/PaletteColor';
 
 import { camelToKebab } from './FormatUtils';
 import { validateRange } from './ValidationUtils';

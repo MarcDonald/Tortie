@@ -10,10 +10,8 @@ export default interface ChipTypes {
   variant?: ChipVariant;
   colors?: {
     backgroundColor?: string;
-    hoverColor?: string;
-    borderColor?: string;
+    foregroundColor?: string;
     textColor?: string;
   };
-  onClick?: () => void;
   disabled?: boolean;
 }
